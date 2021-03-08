@@ -1,0 +1,15 @@
+(originalFilename="net.exe" and cmdline="/del" and cmdline="group" and cmdline="Exchange Organization administrators")
+or
+(originalFilename="cmd.exe" and cmdline="/c" and cmdline="cd" and cmdline="c:\\inetpub")
+or 
+(originalFilename="procdump" and cmdline="-accepteula" and cmdline="lsass.exe")
+or
+(originalFilename="w3wp.exe" and cmdline="msexchangeowaapppool") 
+or 
+(originalFilename="UMWorkerProcess.exe")
+or
+(originalFilename="powershell.exe" and
+  (cmdline="-ep" and cmdline="bypass" )
+  or
+  (cmdline="Add-PSSnapin" and cmdline="Microsoft.Exchange.Powershell.Snapin")
+)
