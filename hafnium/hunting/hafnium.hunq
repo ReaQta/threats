@@ -4,12 +4,14 @@ or
 or 
 (originalFilename="procdump" and cmdline="-accepteula" and cmdline="lsass.exe")
 or
-(originalFilename="w3wp.exe" and cmdline="msexchangeowaapppool") 
-or 
-(originalFilename="UMWorkerProcess.exe")
-or
 (originalFilename="powershell.exe" and
   (cmdline="-ep" and cmdline="bypass" )
   or
   (cmdline="Add-PSSnapin" and cmdline="Microsoft.Exchange.Powershell.Snapin")
 )
+or
+(originalFilename="w3wp.exe" and eventdata.path="c:\windows\microsoft.net\framework64\v4.0.30319\temporary asp.net files\root\")
+or
+(originalFilename="rundll32.exe" and cmdline="c:\windows\system32\comsvcs.dll" and cmdline="minidump")
+or
+(originalFilename="dsquery.exe" and cmdline="*")
