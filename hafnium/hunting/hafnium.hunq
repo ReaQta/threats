@@ -10,8 +10,8 @@ or
   (cmdline="Add-PSSnapin" and cmdline="Microsoft.Exchange.Powershell.Snapin")
 )
 or
-(originalFilename="w3wp.exe" and eventdata.path="c:\windows\microsoft.net\framework64\v4.0.30319\temporary asp.net files\root\")
+(originalFilename="w3wp.exe" and eventdata.path="c:\windows\microsoft.net\framework64\v4.0.30319\temporary asp.net files\root\" and privilege="SYSTEM")
 or
-(originalFilename="rundll32.exe" and cmdline="c:\windows\system32\comsvcs.dll" and cmdline="minidump")
+(originalFilename="rundll32.exe" and cmdline="c:\windows\system32\comsvcs.dll" and cmdline="minidump" and privilege="SYSTEM")
 or
-(originalFilename="dsquery.exe" and cmdline="*")
+(originalFilename="dsquery.exe" and cmdline="*" and privilege="SYSTEM")
