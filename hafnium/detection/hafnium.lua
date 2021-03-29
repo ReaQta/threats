@@ -3,12 +3,18 @@
 -- Compatible OS: windows
 -- Binding Events:
 --   Process Create
+--   Etw DNS
+--
+-- version 2
+--   - added binding and check for dns event
+--   - added check on suspicious powershell process creation
+
 
 if __engine_version < 2 then
     return
 end
 
-local version = 1
+local version = 2
 
 local function notify()
     local title = "HAFNIUM Behaviour detected: v" .. version
@@ -42,7 +48,27 @@ local function net_del_exchange()
     return false
 end
 
-if not event.is_process_created() then return end
-if cmd() or net_del_exchange() then
+local function powershell_bypass()
+    if event.process.get_ofn() ~= "powershell.exe" then return false end
+    local cmdline = event.process.get_cmd_line():lower()
+    if cmdline:find("-ep bypass") and cmdline:find("sqbfafg") then
+        return true
+    end
+end
+
+local function dns_malicious()
+    local known_providers = {
+        "p.estonine.com",
+    }
+    for _, provider in ipairs(known_providers) do
+        if event.data.queryName:match(provider) then
+            return true
+        end
+    end
+    return false
+end
+
+if (event.is_process_created() and (cmd() or net_del_exchange() or powershell_bypass()))
+    or (event.is_dns_actvity() and dns_malicious()) then
     notify()
 end
