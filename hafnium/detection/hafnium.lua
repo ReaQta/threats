@@ -54,6 +54,7 @@ local function powershell_bypass()
     if cmdline:find("-ep bypass") and cmdline:find("sqbfafg") then
         return true
     end
+    return false
 end
 
 local function dns_malicious()
